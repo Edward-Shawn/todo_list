@@ -3,6 +3,7 @@ import TodoList from "./components/TodoList/TodoList";
 import React, {useState, useCallback, useRef} from "react";
 import TodoInsert from "./components/TodoList/TodoInsert";
 import TodoEdit from "./components/TodoList/TodoEdit";
+import TodoTemplate from "./components/TodoList/TodoTemplate";
 
 
 function App() {
@@ -73,24 +74,27 @@ function App() {
 
     return (
         <>
-            <TodoInsert onInsert={onInsert}/>
-
-            <TodoList
-                todos={todos}
-                onToggle={onToggle}
-                onRemove={onRemove}
-                onChangeSelectedTodo={onChangeSelectedTodo}
-                selectedTodo={selectedTodo}
-            />
-            {insertToggle && (
-                <TodoEdit
-                    onInsert={onInsert}
+            <TodoTemplate>
+                <TodoInsert onInsert={onInsert}/>
+                <TodoList
+                    todos={todos}
+                    onToggle={onToggle}
+                    onRemove={onRemove}
+                    onChangeSelectedTodo={onChangeSelectedTodo}
                     selectedTodo={selectedTodo}
                     onInsertToggle={onInsertToggle}
-                    onUpdate={onUpdate}
-                    insertToggle={insertToggle}
                 />
-            )}
+                {insertToggle && (
+                    <TodoEdit
+                        onInsert={onInsert}
+                        selectedTodo={selectedTodo}
+                        onInsertToggle={onInsertToggle}
+                        onUpdate={onUpdate}
+                        insertToggle={insertToggle}
+                    />
+                )}
+            </TodoTemplate>
+
         </>
     );
 }
