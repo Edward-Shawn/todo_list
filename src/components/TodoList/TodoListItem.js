@@ -1,11 +1,47 @@
-import React from "react";
+import React from 'react';
+import {
+    MdCheckBoxOutlineBlank,
+    MdRemoveCircleOutline,
+    MdCheckBox,
+    MdModeEditOutline,
+} from 'react-icons/md';
+import './TodoListItem.scss';
+import cn from 'classnames';
 
-const TodoListItem = () => {
-    return(
-        <li>
-
-        </li>
-    )
+function ToDoListItem({
+                          todo,
+                          onRemove,
+                          onToggle,
+                          onChangeSelectedTodo,
+                          onInsertToggle,
+                          style
+                      }) {
+    const { id, text, checked } = todo;
+    return (
+        <div className="TodoListItem-virtualized" style={style}>
+            <li className="TodoListItem">
+                <div
+                    className={cn('checkbox', { checked: checked })}
+                    onClick={() => onToggle(id)}
+                >
+                    {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+                    <div className="text">{text}</div>
+                </div>
+                <div
+                    className="edit"
+                    onClick={() => {
+                        onChangeSelectedTodo(todo);
+                        onInsertToggle();
+                    }}
+                >
+                    <MdModeEditOutline />
+                </div>
+                <div className="remove" onClick={() => onRemove(id)}>
+                    <MdRemoveCircleOutline />
+                </div>
+            </li>
+        </div>
+    );
 }
 
-export default TodoListItem;
+export default React.memo(ToDoListItem);
