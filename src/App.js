@@ -7,7 +7,6 @@ import TodoTemplate from "./components/TodoList/TodoTemplate";
 
 
 function App() {
-
     const [todos, setTodos] = useState([
         {
             id: 1,
@@ -25,7 +24,6 @@ function App() {
             checked: false,
         },
     ]);
-
     const [selectedTodo, setSelectedTodo] = useState(null);
     const [insertToggle, setInsertToggle] = useState(false);
 
